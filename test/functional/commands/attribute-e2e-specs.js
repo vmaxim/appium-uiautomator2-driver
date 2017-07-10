@@ -1,5 +1,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import wd from 'wd';
+import { usingTestObject } from 'appium-test-support';
 import { APIDEMOS_CAPS } from '../desired';
 import { initDriver } from '../helpers/session';
 
@@ -10,6 +12,10 @@ let driver;
 let animationEl;
 
 describe('apidemo - attributes', function () {
+  if (process.env.TESTOBJECT_E2E_TESTS) {
+    usingTestObject.call(this, wd);
+  }
+
   before(async function () {
     driver = await initDriver(APIDEMOS_CAPS);
     animationEl = await driver.elementByAccessibilityId('Animation');
