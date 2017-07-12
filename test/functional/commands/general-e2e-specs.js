@@ -66,7 +66,7 @@ describe('general', function () {
       appActivity.should.equal(startAppActivity);
     });
   });
-  describe('getStrings', function () {
+  describe('getAppStrings', function () {
     it('should return app strings', async () => {
       let strings = await driver.getAppStrings('en');
       strings.activity_sample_code.should.equal('API Demos');
