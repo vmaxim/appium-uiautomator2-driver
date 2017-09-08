@@ -43,13 +43,13 @@ before_script:
   - npm install appium-test-support # get the travis emu scripts
 
   # android stuff
-  - if $TESTOBJECT_E2E_TESTS; then android list targets; fi
-  - if $TESTOBJECT_E2E_TESTS; then $(npm bin)/android-emu-travis-pre; fi
+  - android list target
+  - $(npm bin)/android-emu-travis-pre
 
   - SERVER_INSTALL_ATTEMPTS=50 npm install
 
   # make sure emulator started
-  - if $TESTOBJECT_E2E_TESTS; then $(npm bin)/android-emu-travis-post; fi
+  - $(npm bin)/android-emu-travis-post
 script:
   - npm run lint && npm run mocha -- -t $MOCHA_TIMEOUT -R spec $RECURSIVE build/test/$TEST -ig @skip-ci
 after_success:
