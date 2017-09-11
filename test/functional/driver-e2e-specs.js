@@ -16,6 +16,10 @@ async function killServer (adbPort) {
 }
 
 describe('createSession', function () {
+  if (process.env.TESTOBJECT_E2E_TESTS) {
+    this.skip();
+  }
+
   let driver;
   before(async function () {
     await killServer(5037);
