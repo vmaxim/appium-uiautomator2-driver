@@ -47,9 +47,9 @@ describe('Find - uiautomator', function () {
     await driver.elementsByAndroidUIAutomator('new UiSelector().clickable(true);')
       .should.eventually.have.length.at.least(10);
   });
-  it.skip('should find an element with an int argument', async () => {
+  it('should find an element with an int argument', async () => {
     let el = await driver.elementByAndroidUIAutomator('new UiSelector().index(0)');
-    await el.name().should.eventually.equal('android.widget.FrameLayout');
+    await el.getAttribute('className').should.eventually.equal('android.widget.FrameLayout');
   });
   it('should find an element with a string argument', async () => {
     await driver

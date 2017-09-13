@@ -17,9 +17,8 @@ describe('general', function () {
     await driver.quit();
   });
 
-  describe.skip('startActivity', function () {
+  describe('startActivity', function () {
     it('should launch a new package and activity', async () => {
-      // TODO: 'getCurrentPackage' is returning 404
       let appPackage =  await driver.getCurrentPackage();
       let appActivity =  await driver.getCurrentActivity();
       appPackage.should.equal('io.appium.android.apis');

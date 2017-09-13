@@ -56,7 +56,7 @@ describe('apidemo - attributes', function () {
     location.x.should.be.at.least(0);
     location.y.should.be.at.least(0);
   });
-  it.skip('should be able to get element location using getLocationInView', async () => {
+  it('should be able to get element location using getLocationInView', async () => {
     // TODO: 'getLocationInView' is returning a 404 not found error
     let location = await animationEl.getLocationInView();
     location.x.should.be.at.least(0);

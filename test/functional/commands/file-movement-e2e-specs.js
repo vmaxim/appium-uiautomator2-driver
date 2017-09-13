@@ -37,7 +37,7 @@ describe('file movement', function () {
     remoteData.should.equal(stringData);
   });
 
-  it.skip('should pull a folder', async () => {
+  it('should pull a folder', async () => {
     let stringData = `random string data ${Math.random()}`;
     let base64Data = new Buffer(stringData).toString('base64');
 

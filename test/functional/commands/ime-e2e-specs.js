@@ -20,18 +20,17 @@ describe('apidemo - IME', function () {
   after(async () => {
     await driver.quit();
   });
-  it.skip('should get the default (enabled) input method', async () => {
-    // TODO: 'activeIMEEngine()' returns 404
+  it('should get the default (enabled) input method', async () => {
     await driver.activeIMEEngine().should.eventually.equal(unicodeImeId);
   });
-  it.skip('should activate an installed input method', async () => {
+  it('should activate an installed input method', async () => {
     await driver.activateIMEEngine(unicodeImeId).should.not.be.rejected;
   });
-  it.skip('should fail to activate an uninstalled input method', async () => {
+  it('should fail to activate an uninstalled input method', async () => {
     let invalidImeId = 'sdf.wer.gdasdfsf/.OsdfEfgd';
     await driver.activateIMEEngine(invalidImeId).should.eventually.be.rejectedWith(/not available/);
   });
-  it.skip('should deactivate the current input method', async () => {
+  it('should deactivate the current input method', async () => {
     await driver.activateIMEEngine(unicodeImeId);
     await driver.activeIMEEngine().should.eventually.equal(unicodeImeId);
     await driver.deactivateIMEEngine();

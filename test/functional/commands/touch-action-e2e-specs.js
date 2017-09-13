@@ -1,5 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import wd from 'wd';
 import { APIDEMOS_CAPS } from '../desired';
 import { initDriver } from '../helpers/session';
 
@@ -20,23 +21,25 @@ describe('apidemo - touch', function () {
       await driver.quit();
     });
 
-    it.skip('should scroll two different lists', async () => {
-      // TODO: Is throwing error: multiTouchAction.toJSON is not a function
-      let [leftList, rightList] = await driver.elementsByClassName('android.widget.ListView');
+    it('should scroll two different lists', async () => {
+      let [leftEl, rightEl] = await driver.elementsByClassName('android.widget.ListView');
 
-      let leftGestures = [
-        {action: 'press', options: {element: leftList}},
-        {action: 'moveTo', options: {element: leftList, x: 10, y: 0}},
-        {action: 'moveTo', options: {element: leftList, x: 10, y: -75}},
-        {action: 'moveTo', options: {element: leftList, x: 10, y: -150}}
-      ];
-      let rightGestures = [
-        {action: 'press', options: {element: rightList}},
-        {action: 'moveTo', options: {element: rightList, x: 10, y: 0}},
-        {action: 'moveTo', options: {element: rightList, x: 10, y: -75}},
-        {action: 'moveTo', options: {element: rightList, x: 10, y: -150}}
-      ];
-      await driver.performMultiAction([leftGestures, rightGestures]);
+      const leftGesture = new wd.TouchAction()
+        .press({element: leftEl})
+        .moveTo({element: leftEl, x: 10, y: 0})
+        .moveTo({element: leftEl, x: 10, y: -75})
+        .moveTo({element: leftEl, x: 10, y: -150});
+
+      const rightGesture = new wd.TouchAction()
+        .press({element: rightEl})
+        .moveTo({element: rightEl, x: 10, y: 0})
+        .moveTo({element: rightEl, x: 10, y: -75})
+        .moveTo({element: rightEl, x: 10, y: -150});
+
+      const multiAction = new wd.MultiAction();
+      multiAction.add(leftGesture, rightGesture);
+
+      await driver.performMultiAction(multiAction);
     });
   });
 
@@ -58,17 +61,14 @@ describe('apidemo - touch', function () {
       els.should.have.length(present ? 1 : 0);
     }
 
-    // TODO: Fix this to use driver swipe (should be calling `commands.swipe`)
-    it.skip('should swipe', async () => {
+    it('should swipe', async () => {
       await assertElement(driver, true);
-      const swipeOpts = {
-        startX: 100
-        , startY: 100
-        , endX: 100
-        , endY: 50
-        , duration: 1.8
-      };
-      await driver.execute('mobile: swipe', swipeOpts);
+      const action = new wd.TouchAction();
+      action.press({x: 100, y: 650})
+        .wait(3000)
+        .moveTo({x: 100, y: 50})
+        .release();
+      driver.performTouchAction(action);
       await assertElement(driver, false);
     });
   });
