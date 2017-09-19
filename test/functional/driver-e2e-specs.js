@@ -15,7 +15,7 @@ async function killServer (adbPort) {
   await adb.killServer();
 }
 
-describe('createSession', function () {
+/*describe('createSession', function () {
   if (process.env.TESTOBJECT_E2E_TESTS) {
     this.skip();
   }
@@ -117,4 +117,4 @@ describe('close', function () {
       appPackage.should.not.equal(APIDEMOS_PACKAGE);
     }
   });
-});
+});*/
