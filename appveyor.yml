@@ -9,7 +9,7 @@ install:
 test_script:
   - node --version
   - npm --version
-  - gulp transpile
-  - mocha -t 64000000 build/functional
+  - npm run build
+  - npm run e2e-test
 
 build: off
