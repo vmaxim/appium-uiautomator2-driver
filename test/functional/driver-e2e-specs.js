@@ -1,4 +1,4 @@
-import chai from 'chai';
+/*import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import AndroidUiautomator2Driver from '../..';
 import ADB from 'appium-adb';
@@ -15,7 +15,7 @@ async function killServer (adbPort) {
   await adb.killServer();
 }
 
-/*describe('createSession', function () {
+describe('createSession', function () {
   if (process.env.TESTOBJECT_E2E_TESTS) {
     this.skip();
   }

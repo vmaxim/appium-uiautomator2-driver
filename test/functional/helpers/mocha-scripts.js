@@ -13,7 +13,7 @@ if (process.env.TESTOBJECT_E2E_TESTS) {
 
   let wdObject;
   before(async function () {
-    const branch = process.env.COMMIT_HASH || process.env.TRAVIS_COMMIT;
+    const branch = process.env.COMMIT_HASH || process.env.APPVEYOR_REPO_COMMIT || process.env.TRAVIS_COMMIT;
     if (!branch) {
       throw new Error(`A commit must be provided in $COMMIT_HASH`);
     }
