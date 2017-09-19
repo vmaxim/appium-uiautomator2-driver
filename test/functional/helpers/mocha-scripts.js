@@ -17,7 +17,7 @@ if (process.env.TESTOBJECT_E2E_TESTS) {
     if (!branch) {
       throw new Error(`A commit must be provided in $COMMIT_HASH`);
     }
-    wdObject = await enableTestObject(wd, 'appium-uiautomator2-driver', `git@github.com:appium/appium-uiautomator2-driver.git#${branch}`);
+    wdObject = await enableTestObject(wd, 'appium-uiautomator2-driver', `https://github.com/appium/appium-uiautomator2-driver.git`);
   });
   after(async function () {
     await disableTestObject(wdObject);
