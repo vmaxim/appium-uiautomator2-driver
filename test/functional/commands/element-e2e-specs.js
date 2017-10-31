@@ -29,17 +29,34 @@ describe('element', function () {
       await el.sendKeys('original value');
       await el.text().should.eventually.equal('original value');
     });
+    it('should be able to append text', async () => {
+      await driver.startActivity({appPackage: PACKAGE, appActivity: TEXT_FIELDS_ACTIVITY});
+      let el = _.last(await driver.elementsByClassName('android.widget.EditText'));
+      await el.sendKeys('old_value');
+      await el.sendKeys('_new_value');
+      await el.text().should.eventually.equal('old_value_new_value');
+    });
+  });
+  describe('replaceValue', () => {
+    it('should be able to replace text', async () => {
+      await driver.startActivity({appPackage: PACKAGE, appActivity: TEXT_FIELDS_ACTIVITY});
+      let el = _.last(await driver.elementsByClassName('android.widget.EditText'));
+      await el.sendKeys('old_value');
+      await el.text().should.eventually.equal('old_value');
+      await el.setText('new_value');
+      await el.text().should.eventually.equal('new_value');
+    });
     it('should be able to set text in picker', async () => {
       await driver.startActivity({appPackage: PACKAGE, appActivity: DATE_WIDGETS_ACTIVITY});
       await (await driver.elementById('io.appium.android.apis:id/pickTimeSpinner')).click();
 
       let hours = await driver.waitForElementByXPath('//android.widget.NumberPicker[1]//android.widget.EditText');
-      await hours.sendKeys('9');
+      await hours.setText('9');
       // Force get focus event
       await hours.click();
 
       let minutes = await driver.elementByXPath('//android.widget.NumberPicker[2]//android.widget.EditText');
-      await minutes.sendKeys('59');
+      await minutes.setText('59');
       // Force get focus event
       await minutes.click();
 
@@ -56,7 +73,7 @@ describe('element', function () {
       await driver.startActivity({appPackage: PACKAGE, appActivity: CUSTOM_PICKER_ACTIVITY});
       let picker = await driver.elementByXPath('//android.widget.NumberPicker[1]//android.widget.EditText');
 
-      await picker.sendKeys('kupima');
+      await picker.setText('kupima');
       // Force get focus event
       await picker.click();
 
