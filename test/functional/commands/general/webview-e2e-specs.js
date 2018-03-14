@@ -2,6 +2,7 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import { APIDEMOS_CAPS } from '../../desired';
 import { initDriver } from '../../helpers/session';
+import _ from 'lodash';
 
 
 chai.should();
@@ -29,6 +30,5 @@ describe('apidemo - webview', function () {
     }
     await driver.context(WEBVIEW);
     await driver.getTitle().should.eventually.become('I am a page title');
-    
   });
 });
