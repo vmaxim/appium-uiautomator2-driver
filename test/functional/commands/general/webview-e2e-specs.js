@@ -29,6 +29,6 @@ describe('apidemo - webview', function () {
       this.skip();
     }
     await driver.context(WEBVIEW);
-    await driver.getTitle().should.eventually.become('I am a page title');
+    await driver.title().should.eventually.become('I am a page title');
   });
 });
